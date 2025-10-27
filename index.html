@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanjay Veeramalla - Java Full Stack Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --text-dark: #1f2937;
+            --text-light: #6b7280;
+            --bg-light: #f9fafb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: white;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            box-shadow: var(--shadow);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 6rem 2rem 2rem;
+            background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .hero-content h2 {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-image svg {
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--primary);
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .about-details {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1rem;
+        }
+
+        .detail-item span:first-child {
+            font-size: 1.25rem;
+        }
+
+        .detail-item a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .education-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .education-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .education-card h3 {
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .education-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .education-card .grade {
+            color: var(--primary);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .project-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-badge {
+            background: var(--bg-light);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .project-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-links a {
+            padding: 0.5rem 1.25rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .link-live {
+            background: var(--primary);
+            color: white;
+        }
+
+        .link-live:hover {
+            background: var(--primary-dark);
+        }
+
+        .link-github {
+            background: var(--text-dark);
+            color: white;
+        }
+
+        .link-github:hover {
+            background: #000;
+        }
+
+        /* Skills Section */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .skill-category {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .skill-category h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-dark);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .skill-tag {
+            background: var(--bg-light);
+            color: var(--text-dark);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        /* Certifications Section */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .cert-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+
+        .cert-card:hover {
+            transform: translateX(8px);
+            box-shadow: var(--shadow-lg);
+            border-left-color: var(--primary-dark);
+        }
+
+        .cert-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-dark);
+        }
+
+        .cert-card p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-text {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.875rem;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-4px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: white;
+                width: 100%;
+                padding: 2rem;
+                box-shadow: var(--shadow);
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .hero-container,
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-image {
+                order: -1;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Sanjay Veeramalla</div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h2>Hi, I'm</h2>
+                <h1>Sanjay Veeramalla 👋</h1>
+                <p>A passionate Java Full Stack Developer from Hyderabad, India.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Projects</a>
+                    <a href="https://drive.google.com/uc?export=download&id=1HYprhDsMZP7wEDG-2WF90kPfB0ecDLaw"
+                        class="btn btn-secondary" target="_blank">Download Resume</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Background circles -->
+                    <circle cx="250" cy="250" r="220" fill="#e0e7ff" opacity="0.2" />
+                    <circle cx="250" cy="250" r="180" fill="#dbeafe" opacity="0.3" />
+
+                    <!-- Laptop base -->
+                    <rect x="100" y="320" width="300" height="20" rx="3" fill="#1e40af" />
+                    <path d="M 80 340 L 420 340 L 400 360 L 100 360 Z" fill="#1e293b" />
+
+                    <!-- Laptop screen -->
+                    <rect x="120" y="140" width="260" height="180" rx="8" fill="#1e40af" />
+                    <rect x="135" y="155" width="230" height="150" rx="4" fill="#0f172a" />
+
+                    <!-- Code editor window -->
+                    <rect x="145" y="165" width="210" height="20" rx="3" fill="#1e293b" />
+                    <circle cx="155" cy="175" r="3" fill="#ef4444" />
+                    <circle cx="167" cy="175" r="3" fill="#eab308" />
+                    <circle cx="179" cy="175" r="3" fill="#22c55e" />
+
+                    <!-- Code lines (colorful) -->
+                    <rect x="150" y="195" width="60" height="6" rx="2" fill="#c084fc" />
+                    <rect x="215" y="195" width="80" height="6" rx="2" fill="#60a5fa" />
+                    <rect x="300" y="195" width="45" height="6" rx="2" fill="#34d399" />
+
+                    <rect x="150" y="210" width="40" height="6" rx="2" fill="#fb923c" />
+                    <rect x="195" y="210" width="90" height="6" rx="2" fill="#a78bfa" />
+                    <rect x="290" y="210" width="55" height="6" rx="2" fill="#60a5fa" />
+
+                    <rect x="150" y="225" width="70" height="6" rx="2" fill="#34d399" />
+                    <rect x="225" y="225" width="50" height="6" rx="2" fill="#fbbf24" />
+                    <rect x="280" y="225" width="65" height="6" rx="2" fill="#c084fc" />
+
+                    <rect x="150" y="240" width="55" height="6" rx="2" fill="#60a5fa" />
+                    <rect x="210" y="240" width="75" height="6" rx="2" fill="#fb923c" />
+                    <rect x="290" y="240" width="40" height="6" rx="2" fill="#a78bfa" />
+
+                    <rect x="150" y="255" width="85" height="6" rx="2" fill="#22c55e" />
+                    <rect x="240" y="255" width="60" height="6" rx="2" fill="#60a5fa" />
+                    <rect x="305" y="255" width="40" height="6" rx="2" fill="#c084fc" />
+
+                    <rect x="150" y="270" width="50" height="6" rx="2" fill="#a78bfa" />
+                    <rect x="205" y="270" width="70" height="6" rx="2" fill="#34d399" />
+                    <rect x="280" y="270" width="55" height="6" rx="2" fill="#fb923c" />
+
+                    <rect x="150" y="285" width="65" height="6" rx="2" fill="#fbbf24" />
+                    <rect x="220" y="285" width="90" height="6" rx="2" fill="#60a5fa" />
+
+                    <!-- Full Stack Layers (left side) -->
+                    <g transform="translate(40, 180)">
+                        <rect x="0" y="0" width="50" height="15" rx="3" fill="#ef4444" opacity="0.9" />
+                        <text x="25" y="11" font-family="Arial, sans-serif" font-size="9" fill="white"
+                            text-anchor="middle" font-weight="bold">HTML</text>
+
+                        <rect x="0" y="20" width="50" height="15" rx="3" fill="#3b82f6" opacity="0.9" />
+                        <text x="25" y="31" font-family="Arial, sans-serif" font-size="9" fill="white"
+                            text-anchor="middle" font-weight="bold">CSS</text>
+
+                        <rect x="0" y="40" width="50" height="15" rx="3" fill="#eab308" opacity="0.9" />
+                        <text x="25" y="51" font-family="Arial, sans-serif" font-size="9" fill="white"
+                            text-anchor="middle" font-weight="bold">JS</text>
+
+                        <rect x="0" y="60" width="50" height="15" rx="3" fill="#f97316" opacity="0.9" />
+                        <text x="25" y="71" font-family="Arial, sans-serif" font-size="8" fill="white"
+                            text-anchor="middle" font-weight="bold">JAVA</text>
+
+                        <rect x="0" y="80" width="50" height="15" rx="3" fill="#22c55e" opacity="0.9" />
+                        <text x="25" y="91" font-family="Arial, sans-serif" font-size="8" fill="white"
+                            text-anchor="middle" font-weight="bold">Spring</text>
+
+                        <rect x="0" y="100" width="50" height="15" rx="3" fill="#06b6d4" opacity="0.9" />
+                        <text x="25" y="111" font-family="Arial, sans-serif" font-size="9" fill="white"
+                            text-anchor="middle" font-weight="bold">SQL</text>
+                    </g>
+
+                    <!-- Coffee cup (developer fuel!) -->
+                    <g transform="translate(410, 230)">
+                        <rect x="0" y="15" width="35" height="30" rx="3" fill="#8b4513" />
+                        <rect x="2" y="17" width="31" height="20" rx="2" fill="#d2691e" />
+                        <ellipse cx="17.5" cy="15" rx="17.5" ry="4" fill="#6b4423" />
+                        <path d="M 35 20 Q 45 20 45 30 Q 45 40 35 40" stroke="#8b4513" stroke-width="3" fill="none" />
+                        <!-- Steam lines -->
+                        <path d="M 12 8 Q 10 5 12 2" stroke="#94a3b8" stroke-width="1.5" fill="none" opacity="0.6" />
+                        <path d="M 20 8 Q 18 4 20 0" stroke="#94a3b8" stroke-width="1.5" fill="none" opacity="0.6" />
+                        <path d="M 28 8 Q 26 5 28 2" stroke="#94a3b8" stroke-width="1.5" fill="none" opacity="0.6" />
+                    </g>
+
+                    <!-- Floating code brackets -->
+                    <text x="420" y="160" font-family="monospace" font-size="30" fill="#60a5fa" opacity="0.4"
+                        font-weight="bold">{ }</text>
+                    <text x="60" y="130" font-family="monospace" font-size="25" fill="#a78bfa" opacity="0.4"
+                        font-weight="bold">&lt;/&gt;</text>
+                    <text x="400" y="300" font-family="monospace" font-size="20" fill="#34d399" opacity="0.4"
+                        font-weight="bold">( )</text>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title fade-in">About Me</h2>
+        <p class="about-text fade-in" style="text-align: center; max-width: 800px; margin: 0 auto 3rem;">
+            I'm a B.Tech Computer Science graduate (2025) from Guru Nanak Institute of Technology with a CGPA of 8.78.
+            Passionate about solving real-world problems using Data Structures, Algorithms, and Java Full Stack
+            Development.
+            I aim to contribute effectively to challenging software projects and grow as a developer.
+        </p>
+        <div class="about-content">
+            <div class="fade-in">
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Quick Info</h3>
+                <div class="about-details">
+                    <div class="detail-item">
+                        <span>📍</span>
+                        <span><strong>Location:</strong> Hyderabad, Telangana, India</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>🎓</span>
+                        <span><strong>Education:</strong> B.Tech in CSE (2021–2025)</span>
+                    </div>
+                    <div class="detail-item">
+                        <span>📧</span>
+                        <span><strong>Email:</strong> <a
+                                href="mailto:sanjaygoudveeramalla@gmail.com">sanjaygoudveeramalla@gmail.com</a></span>
+                    </div>
+                    <div class="detail-item">
+                        <span>🔗</span>
+                        <span><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/sanjay-veeramalla"
+                                target="_blank">linkedin.com/in/sanjay-veeramalla</a></span>
+                    </div>
+                    <div class="detail-item">
+                        <span>💻</span>
+                        <span><strong>GitHub:</strong> <a href="https://github.com/Sanjay-Goud"
+                                target="_blank">github.com/Sanjay-Goud</a></span>
+                    </div>
+                </div>
+            </div>
+            <div class="fade-in">
+                <h3 style="margin-bottom: 1.5rem; font-size: 1.5rem;">Education Timeline</h3>
+                <div class="education-card">
+                    <h3>Guru Nanak Institute of Technology</h3>
+                    <p>B.Tech in Computer Science & Engineering</p>
+                    <p>2021 – 2025</p>
+                    <p class="grade">CGPA: 8.78/10</p>
+                </div>
+                <div class="education-card">
+                    <h3>Aakash Junior College</h3>
+                    <p>Intermediate - MPC</p>
+                    <p>2021</p>
+                    <p class="grade">Grade: 97.8%</p>
+                </div>
+                <div class="education-card">
+                    <h3>G.G.H.S Kachiguda High School</h3>
+                    <p>Secondary Education</p>
+                    <p>2019</p>
+                    <p class="grade">CGPA: 9.5/10</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" style="background: var(--bg-light);">
+        <h2 class="section-title fade-in">My Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <h3>Task Manager</h3>
+                <div class="tech-stack">
+                    <span class="tech-badge">Java</span>
+                    <span class="tech-badge">Spring Boot</span>
+                    <span class="tech-badge">HTML</span>
+                    <span class="tech-badge">CSS</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">SQL</span>
+                </div>
+                <p class="project-description">
+                    Full-stack task management app with authentication, deadlines, priority levels, and dashboard
+                    analytics.
+                    Features real-time status updates and intuitive UX for improved productivity.
+                </p>
+                <div class="project-links">
+                    <a href="https://task-manager-3ygp.onrender.com" target="_blank" class="link-live">View Live</a>
+                    <a href="https://github.com/Sanjay-Goud" target="_blank" class="link-github">GitHub</a>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <h3>Banking Management System</h3>
+                <div class="tech-stack">
+                    <span class="tech-badge">Java</span>
+                    <span class="tech-badge">Spring Boot</span>
+                    <span class="tech-badge">HTML</span>
+                    <span class="tech-badge">CSS</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">SQL</span>
+                </div>
+                <p class="project-description">
+                    Banking web app with JWT authentication, fund transfers, admin dashboard, and automated PDF
+                    statement generation.
+                    Built with RESTful API architecture and Spring Security.
+                </p>
+                <div class="project-links">
+                    <a href="https://bank-management-system-0z4j.onrender.com" target="_blank" class="link-live">View
+                        Live</a>
+                    <a href="https://github.com/Sanjay-Goud" target="_blank" class="link-github">GitHub</a>
+                </div>
+            </div>
+
+            <div class="project-card fade-in">
+                <h3>Quiz Application</h3>
+                <div class="tech-stack">
+                    <span class="tech-badge">Java</span>
+                    <span class="tech-badge">Spring Boot</span>
+                    <span class="tech-badge">HTML</span>
+                    <span class="tech-badge">CSS</span>
+                    <span class="tech-badge">JavaScript</span>
+                    <span class="tech-badge">PostgreSQL</span>
+                </div>
+                <p class="project-description">
+                    Online quiz platform with category-based questions, result analytics, and role-based access.
+                    Features dynamic quiz generation and user performance dashboards.
+                </p>
+                <div class="project-links">
+                    <a href="https://quiz-app-gel1.onrender.com" target="_blank" class="link-live">View Live</a>
+                    <a href="https://github.com/Sanjay-Goud" target="_blank" class="link-github">GitHub</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title fade-in">Skills & Tools</h2>
+        <div class="skills-container">
+            <div class="skill-category fade-in">
+                <h3>Programming Languages</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">C</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">Python</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h3>Web Technologies</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">HTML</span>
+                    <span class="skill-tag">CSS</span>
+                    <span class="skill-tag">JavaScript</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h3>Frameworks & Tools</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Spring Boot</span>
+                    <span class="skill-tag">MySQL</span>
+                    <span class="skill-tag">Git</span>
+                </div>
+            </div>
+
+            <div class="skill-category fade-in">
+                <h3>CS Fundamentals</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">OOPS</span>
+                    <span class="skill-tag">DSA</span>
+                    <span class="skill-tag">OS</span>
+                    <span class="skill-tag">DBMS</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" style="background: var(--bg-light);">
+        <h2 class="section-title fade-in">Certifications</h2>
+        <div class="certifications-grid">
+            <a href="https://drive.google.com/file/d/1VGboJ6VFzJXzVY2Dn0o5j33lLYiJowc6/view" target="_blank"
+                class="cert-card fade-in" title="Click to view certificate">
+                <h3>Intrainz Internship in Java</h3>
+                <p>November 2023 – January 2024</p>
+            </a>
+            <a href="https://skillwallet.smartinternz.com/internships/salesforce_certificates/54ff9e9e3a2ec0300d4ce11261f5169f"
+                target="_blank" class="cert-card fade-in" title="Click to view certificate">
+                <h3>Salesforce Developer Virtual Internship</h3>
+                <p>May 2024 – June 2024</p>
+            </a>
+            <a href="https://cert.diceid.com/cid/15LXeftEoc" target="_blank" class="cert-card fade-in"
+                title="Click to view certificate">
+                <h3>Wipro TalentNext Java Full Stack</h3>
+                <p>May 2024 – September 2024</p>
+            </a>
+            <a href="https://drive.google.com/file/d/13HzqAw3qwE-Rx43pxlYZXgv-a3BFVJhg/view" target="_blank"
+                class="cert-card fade-in" title="Click to view certificate">
+                <h3>Software Engineering Job Simulation</h3>
+                <p>JPMorgan Chase & Co. (Forage) - October 2025</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2 class="section-title fade-in">Get In Touch</h2>
+        <div class="contact-content fade-in">
+            <p class="contact-text">
+                I'm open to software development roles, collaborations, or tech discussions. Let's connect!
+            </p>
+            <form class="contact-form" id="contactForm" action="https://formspree.io/f/xovpjdlj" method="POST">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Send Message</button>
+            </form>
+            <div id="form-status" style="margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none;"></div>
+            <div class="social-links">
+                <a href="https://linkedin.com/in/sanjay-veeramalla" target="_blank" class="social-link"
+                    title="LinkedIn">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                </a>
+                <a href="https://github.com/Sanjay-Goud" target="_blank" class="social-link" title="GitHub">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
+                <a href="mailto:sanjaygoudveeramalla@gmail.com" class="social-link" title="Email">
+                    <svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                        <path
+                            d="M12 12.713l-11.985-9.713h23.97l-11.985 9.713zm0 2.574l-12-9.725v15.438h24v-15.438l-12 9.725z" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Sanjay Veeramalla | Designed using HTML, CSS, JS</p>
+    </footer>
+
+    <script>
+        // Mobile Navigation Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for Fade-in Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Contact Form Handler with Formspree
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const form = e.target;
+            const formStatus = document.getElementById('form-status');
+            const submitButton = form.querySelector('button[type="submit"]');
+            const originalButtonText = submitButton.textContent;
+
+            // Disable button and show loading state
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sending...';
+
+            try {
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    formStatus.style.display = 'block';
+                    formStatus.style.background = '#d1fae5';
+                    formStatus.style.color = '#065f46';
+                    formStatus.textContent = 'Thank you for your message! I will get back to you soon.';
+                    form.reset();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                formStatus.style.display = 'block';
+                formStatus.style.background = '#fee2e2';
+                formStatus.style.color = '#991b1b';
+                formStatus.textContent = 'Oops! There was a problem submitting your form. Please try again.';
+            } finally {
+                // Re-enable button
+                submitButton.disabled = false;
+                submitButton.textContent = originalButtonText;
+
+                // Hide status message after 5 seconds
+                setTimeout(() => {
+                    formStatus.style.display = 'none';
+                }, 5000);
+            }
+        });
+
+        // Navbar Shadow on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+
+</html>
